@@ -74,8 +74,6 @@ const Orders = () => {
         </table>
       </div>
 
-            //for testing purposes, added by Youzhi
-<div>{JSON.stringify(orders)}</div>
 
       <BackToHomeButton />
     </div>
