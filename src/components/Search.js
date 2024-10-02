@@ -20,7 +20,7 @@ const Search = () => {
     setError(''); // Clear previous errors
 
     // Send GET request to Flask backend with product_name as a query param
-    axios.get(`98.84.2.170/search_product?product_name=${query}`)
+    axios.get(`http://98.84.2.170/search_product?product_name=${query}`)
       .then((response) => {
         setProducts(response.data); // Populate products state with fetched data
         if (response.data.length === 0) {
