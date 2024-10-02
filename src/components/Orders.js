@@ -11,7 +11,7 @@ const Orders = () => {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    axios.get(`/search_order?order_id=${orderId}`)
+    axios.get(`http://3.83.126.220:8888/search_order?order_id=${orderId}`)
       .then(response => {
         setOrders(response.data.orders);
         setError('');
@@ -73,6 +73,9 @@ const Orders = () => {
           </tbody>
         </table>
       </div>
+
+            //for testing purposes, added by Youzhi
+<div>{JSON.stringify(orders)}</div>
 
       <BackToHomeButton />
     </div>
