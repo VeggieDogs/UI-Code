@@ -11,7 +11,7 @@ const Orders = () => {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    axios.get(`http://3.83.126.220:8888/search_order?order_id=${orderId}`)
+    axios.get(`http://54.157.229.55:8888/search_order?order_id=${orderId}`)
       .then(response => {
         setOrders(response.data.orders);
         setError('');
