@@ -1,0 +1,116 @@
+/* Global Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* Header Section */
+.header {
+    background-color: #ff6600;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+/* Admin button */
+.admin-button {
+    font-size: 12px;
+    padding: 5px 10px;
+    background-color: #001f3f;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: auto; /* Ensure the button width is automatically sized */
+    display: inline-block; /* Prevent the button from stretching */
+}
+
+.admin-button:hover {
+    background-color: #0056b3;
+}
+
+/* Main content area */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Carousel Section */
+.carousel-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.carousel img {
+    width: 100%;
+    height: auto;
+}
+
+/* Welcome message */
+.welcome-message {
+    margin-top: 30px;
+}
+
+.welcome-message h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.welcome-message p {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+/* Button styles */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+button {
+    background-color: #002244;
+    color: white;
+    border: none;
+    padding: 10px 20px; /* Adjust padding for consistency */
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    width: auto; /* Ensure buttons don't stretch */
+    display: inline-block;
+}
+
+button:hover {
+    background-color: #004488;
+}
+
+/* Footer Section */
+.footer {
+    background-color: #ff6600;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+}

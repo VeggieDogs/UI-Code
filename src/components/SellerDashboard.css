@@ -1,0 +1,74 @@
+.seller-dashboard {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the content horizontally */
+  }
+  
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Set max width to control the layout width */
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 2rem;
+  }
+  
+  .view-orders-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #001f3f; /* Dark blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: auto; /* Ensure the width is auto to prevent stretching */
+    display: inline-block; /* Ensure the button does not stretch */
+  }
+  
+  .view-orders-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    gap: 20px;
+    justify-items: center; /* Center each product item */
+    width: 100%;
+    max-width: 1200px; /* Control overall width for better responsiveness */
+  }
+  
+  .product-item {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    width: 250px; /* Fix width for consistency */
+  }
+  
+  .product-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .product-item h2 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+  
+  .product-item p {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .back-to-home {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  

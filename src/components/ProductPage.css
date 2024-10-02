@@ -1,0 +1,122 @@
+/* src/components/ProductPage.css */
+.product-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .product-container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px; /* Reduced margin */
+  }
+  
+  .product-images {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin-right: 40px;
+  }
+  
+  .main-image {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 8px;
+  }
+  
+  .product-details {
+    flex: 1;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .product-title {
+    font-size: 2.5rem;
+    margin-bottom: 15px; /* Reduced margin */
+  }
+  
+  .product-price, .product-condition, .shipping-info {
+    margin-bottom: 15px; /* Adjusted spacing */
+  }
+  
+  .product-description {
+    margin-bottom: 20px; /* Reduced margin */
+  }
+  
+  .product-actions {
+    margin-bottom: 30px; /* Adjusted spacing */
+  }
+  
+  .buy-now-button, .add-to-watchlist-button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    height: 50px;
+  }
+  
+  .buy-now-button {
+    background-color: #0044cc;
+    color: white;
+    margin-right: 10px;
+  }
+  
+  .add-to-watchlist-button {
+    background-color: #ffa500;
+    color: white;
+  }
+  
+  .back-buttons-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px; /* Move closer to product details */
+  }
+  
+  .back-buttons-container button {
+    margin-right: 10px;
+    height: 50px;
+  }
+  
+  .back-to-product-listing-button, .back-to-home-button {
+    background-color: #ff6600;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+  }
+
+    /* src/components/ProductPage.css */
+    .back-buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;  /* Align items in the same row */
+    gap: 20px;  /* Provide space between buttons */
+    margin-top: 20px;  /* Ensure it is not too far from the content */
+    }
+
+    .back-buttons-container button {
+    width: 150px;  /* Set consistent width */
+    height: 50px;  /* Set consistent height */
+    background-color: #ff6600;
+    color: white;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    }
+
+    
+    
+    
+  
+  
