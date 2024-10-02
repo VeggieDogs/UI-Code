@@ -18,7 +18,7 @@ const AdminPage = () => {
     setError(''); // Clear any existing errors
 
     // Call the Flask API to search for users by username
-    axios.get(`http://52.203.71.245/search_user?username=${username}`)
+    axios.get(`http://52.203.71.245:8888/search_user?username=${username}`)
       .then((response) => {
         setUsers(response.data); // Update the user state with the response
         if (response.data.length === 0) {
