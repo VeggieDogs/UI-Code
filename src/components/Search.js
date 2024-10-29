@@ -12,7 +12,7 @@ const Search = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (query.trim() === '') {
       setError('Please enter a product name to search.');
       return;
@@ -20,17 +20,27 @@ const Search = () => {
 
     setError('');
 
-    axios.get(`${COMPOSITE_API_BASE_URL}/products?product_name=${query}`)
-      .then((response) => {
-        setProducts(response.data.products ? response.data.products[0] : []);
-        if (response.data.products[0].length === 0) {
+    try {
+      const response = await axios.get(`${COMPOSITE_API_BASE_URL}/products?product_name=${query}`);
+      console.log('API Response:', response.data); // Log the response data to see its structure
+
+      if (response.data && response.data.products) {
+        // Check if the products array is in the expected format
+        const productList = Array.isArray(response.data.products[0]) ? response.data.products[0] : response.data.products;
+        setProducts(productList);
+
+        // If no products are found, display a message
+        if (productList.length === 0) {
           setError('No products found for the given name.');
         }
-      })
-      .catch((err) => {
-        console.error('Error fetching products:', err);
-        setError('Error fetching products.');
-      });
+      } else {
+        setError('Unexpected response format.');
+        console.warn('Unexpected response format:', response.data);
+      }
+    } catch (err) {
+      console.error('Error fetching products:', err);
+      setError('Error fetching products.');
+    }
   };
 
   const goToOrders = () => {
@@ -38,7 +48,7 @@ const Search = () => {
   };
 
   const goToPostOrder = () => {
-    navigate('/post-order'); // Navigate to the Post Order page
+    navigate('/post-order');
   };
 
   return (
@@ -73,7 +83,7 @@ const Search = () => {
             </Link>
           ))
         ) : (
-          <p>No products found</p>
+          !error && <p>No products found</p> // Only show if no error and no products
         )}
       </div>
 
@@ -83,4 +93,3 @@ const Search = () => {
 };
 
 export default Search;
-

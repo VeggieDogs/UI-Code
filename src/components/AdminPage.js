@@ -22,41 +22,26 @@ const AdminPage = () => {
 
     setError(''); // Clear any existing errors
 
-    // Determine the search parameter
-    const searchParam = username ? `username=${username}` : `user_id=${userId}`;
-
     // Reset previous data
     setUserInfo(null);
     setProducts([]);
     setOrders([]);
 
-    // Fetch user info
-    axios.get(`${COMPOSITE_API_BASE_URL}/users?${searchParam}`)
+    // Fetch all info (user details, products, orders) in a single call
+    axios.get(`${COMPOSITE_API_BASE_URL}/all?user_id=${userId || username}`)
       .then((response) => {
-        const usersData = response.data.users || [];
-        if (usersData.length === 0) {
-          setError('No user found with the given information.');
+        const data = response.data;
+        
+        if (data.users && data.users.length > 0) {
+          setUserInfo(data.users[0]); // Set user information
         } else {
-          setUserInfo(usersData[0]); // Assuming the first match
+          setError('No user found with the given information.');
         }
-      })
-      .catch(() => setError('Error fetching user information.'));
 
-    // Fetch products associated with the user ID
-    if (userId) {
-      axios.get(`${COMPOSITE_API_BASE_URL}/products?user_id=${userId}`)
-        .then((response) => {
-          setProducts(response.data.products || []);
-        })
-        .catch(() => setError('Error fetching user products.'));
-      
-      // Fetch orders associated with the user ID
-      axios.get(`${COMPOSITE_API_BASE_URL}/orders?user_id=${userId}`)
-        .then((response) => {
-          setOrders(response.data.orders || []);
-        })
-        .catch(() => setError('Error fetching user orders.'));
-    }
+        setProducts(data.products || []); // Set associated products
+        setOrders(data.orders || []);     // Set associated orders
+      })
+      .catch(() => setError('Error fetching information.'));
   };
 
   return (
@@ -176,4 +161,3 @@ const AdminPage = () => {
 };
 
 export default AdminPage;
-

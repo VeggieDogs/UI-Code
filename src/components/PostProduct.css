@@ -4,19 +4,21 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    width: 100%;
 }
 
+/* Form Styling */
 .post-product-form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px; /* Increased spacing for better readability */
     max-width: 400px;
     width: 100%;
 }
 
 .post-product-form input,
 .post-product-form textarea {
-    padding: 10px;
+    padding: 12px; /* Slightly larger padding for better usability */
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -24,24 +26,37 @@
 
 .post-product-form textarea {
     resize: vertical;
-    min-height: 100px;
+    min-height: 120px; /* Slightly larger height */
 }
 
+/* Submit Button Styling */
 .post-product-form button {
-    padding: 10px;
+    padding: 12px;
     font-size: 1rem;
     color: white;
     background-color: #001f3f;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
 }
 
 .post-product-form button:hover {
     background-color: #0056b3;
 }
 
+/* Error Message Styling */
 .error-message {
     color: red;
     margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    .post-product-form {
+        max-width: 100%;
+        padding: 0 20px; /* Padding on mobile for better spacing */
+    }
 }

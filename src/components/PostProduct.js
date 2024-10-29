@@ -1,6 +1,6 @@
 // src/components/PostProduct.js
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './PostProduct.css';
 
@@ -8,16 +8,13 @@ const COMPOSITE_API_BASE_URL = 'http://localhost:8891/composite';
 
 const PostProduct = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const sellerId = location.state?.sellerId; // Access sellerId from navigation state
-
   const [productData, setProductData] = useState({
     product_name: '',
     price: '',
     quantity: '',
     description: '',
     image_url: '',
-    seller_id: sellerId, // Set seller_id from navigation state
+    seller_id: '', // Let the user enter seller_id
   });
   const [error, setError] = useState('');
 
@@ -34,9 +31,9 @@ const PostProduct = () => {
 
     try {
       const response = await axios.post(`${COMPOSITE_API_BASE_URL}/post_product`, productData);
-      if (response.status === 201) {
+      if (response.status === 202) {
         alert('Product posted successfully!');
-        navigate('/seller-dashboard', { state: { refresh: true } }); // Pass refresh flag to trigger update
+        navigate('/seller-dashboard', { state: { refresh: true } });
       } else {
         setError('Failed to post the product.');
       }
@@ -89,6 +86,14 @@ const PostProduct = () => {
           onChange={handleInputChange}
           required
         />
+        <input
+          type="text"
+          name="seller_id"
+          placeholder="Seller ID"
+          value={productData.seller_id}
+          onChange={handleInputChange}
+          required
+        />
         <button type="submit">Submit Product</button>
       </form>
     </div>
@@ -96,4 +101,3 @@ const PostProduct = () => {
 };
 
 export default PostProduct;
-
