@@ -1,0 +1,43 @@
+/* Container for post order page */
+.post-order-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.post-order-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Form styling */
+.post-order-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.post-order-form input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Submit button styling */
+.submit-order-button {
+    background-color: #001f3f;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-order-button:hover {
+    background-color: #0056b3;
+}

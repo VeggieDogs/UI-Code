@@ -4,6 +4,8 @@ import './Orders.css';  // Assuming the CSS file is saved as Orders.css
 import { useNavigate } from 'react-router-dom';
 import BackToHomeButton from './BackToHomeButton';
 
+const COMPOSITE_API_BASE_URL = 'http://localhost:8891/composite';
+
 const Orders = () => {
   const [orderId, setOrderId] = useState('');
   const [orders, setOrders] = useState([]);
@@ -11,7 +13,7 @@ const Orders = () => {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    axios.get(`http://54.157.229.55:8888/search_order?order_id=${orderId}`)
+    axios.get(`${COMPOSITE_API_BASE_URL}/orders?order_id=${orderId}`)
       .then(response => {
         setOrders(response.data.orders);
         setError('');
@@ -73,7 +75,6 @@ const Orders = () => {
           </tbody>
         </table>
       </div>
-
 
       <BackToHomeButton />
     </div>

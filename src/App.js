@@ -5,10 +5,12 @@ import Homepage from './components/Homepage';
 import Search from './components/Search';
 import ProductPage from './components/ProductPage';
 import Login from './components/Login';
-import SellerDashboard from './components/SellerDashboard';
 import AdminPage from './components/AdminPage';
 import Orders from './components/Orders';
 import SellerOrders from './components/SellerOrders';
+import PostProduct from './components/PostProduct';
+import SellerDashboard from './components/SellerDashboard';
+import PostOrder from './components/PostOrder';
 
 const sampleBuyerOrders = [
   { id: 1, productName: 'Product 1', quantity: 2, totalPrice: 100, status: 'Shipped' },
@@ -43,6 +45,9 @@ function App() {
         <Route path="/admin" element={<AdminPage />} /> 
         <Route path="/orders" element={<Orders orders={sampleBuyerOrders} />} />
         <Route path="/seller-orders" element={<SellerOrders orders={sampleSellerOrders} />} />
+        <Route path="/post-product" element={<PostProduct />} />
+        <Route path="/seller-dashboard" element={<SellerDashboard sellerId={1} />} />
+        <Route path="/post-order" element={<PostOrder />} />
       </Routes>
     </Router>
   );

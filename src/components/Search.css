@@ -1,4 +1,4 @@
-/* Search container */
+/* Container for search page */
 .search-container {
     display: flex;
     flex-direction: column;
@@ -6,7 +6,13 @@
     padding: 20px;
 }
 
-/* Search bar styling */
+/* Title styling */
+.search-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Search bar container */
 .search-bar-container {
     display: flex;
     justify-content: center;
@@ -34,6 +40,21 @@
 
 .search-bar-container button:hover {
     background-color: #0056b3;
+}
+
+/* Additional button styling for Post Order button */
+.post-order-button {
+    background-color: #28a745; /* Green color for Post Order button */
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.post-order-button:hover {
+    background-color: #218838; /* Darker green on hover */
 }
 
 /* Error message styling */
