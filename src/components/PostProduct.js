@@ -31,7 +31,7 @@ const PostProduct = () => {
 
     try {
       const response = await axios.post(`${COMPOSITE_API_BASE_URL}/post_product`, productData);
-      if (response.status === 202) {
+      if (response.status === 201) {
         alert('Product posted successfully!');
         navigate('/seller-dashboard', { state: { refresh: true } });
       } else {
