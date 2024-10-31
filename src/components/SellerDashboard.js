@@ -5,9 +5,12 @@ import './SellerDashboard.css';
 import BackToHomeButton from './BackToHomeButton';
 
 const COMPOSITE_API_BASE_URL = 'http://localhost:8891/composite';
+const ITEMS_PER_PAGE = 5; // Define how many items per page
 
 const SellerDashboard = ({ sellerId }) => {
   const [products, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const navigate = useNavigate();
 
   // Memoize fetchProducts with useCallback to prevent redefinition on each render
@@ -17,7 +20,9 @@ const SellerDashboard = ({ sellerId }) => {
       console.log('API Response:', response.data); // Debugging: Log the response
 
       if (response.status === 200 && response.data.products && response.data.products[0]) {
-        setProducts(response.data.products[0]); // Update with actual data structure if different
+        const allProducts = response.data.products[0];
+        setProducts(allProducts.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE)); // Load current page products
+        setTotalPages(Math.ceil(allProducts.length / ITEMS_PER_PAGE)); // Calculate total pages
       } else {
         console.warn('No products found in response.');
         setProducts([]);
@@ -25,11 +30,11 @@ const SellerDashboard = ({ sellerId }) => {
     } catch (error) {
       console.error('Error fetching products:', error);
     }
-  }, [sellerId]);
+  }, [sellerId, currentPage]);
 
   useEffect(() => {
     fetchProducts();
-  }, [fetchProducts]);
+  }, [fetchProducts, currentPage]);
 
   const deleteProduct = async (productId) => {
     try {
@@ -43,6 +48,19 @@ const SellerDashboard = ({ sellerId }) => {
     } catch (error) {
       console.error('Error deleting product:', error);
       alert('An error occurred while deleting the product');
+    }
+  };
+
+  // Pagination control functions
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
     }
   };
 
@@ -90,12 +108,20 @@ const SellerDashboard = ({ sellerId }) => {
         )}
       </div>
 
+      {/* Pagination Controls */}
+      <div className="pagination-controls">
+        <button onClick={prevPage} disabled={currentPage === 1}>Previous</button>
+        <span>Page {currentPage} of {totalPages}</span>
+        <button onClick={nextPage} disabled={currentPage === totalPages}>Next</button>
+      </div>
+
       <BackToHomeButton />
     </div>
   );
 };
 
 export default SellerDashboard;
+
 
 
 

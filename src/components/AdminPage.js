@@ -6,40 +6,52 @@ import BackToHomeButton from './BackToHomeButton';
 const COMPOSITE_API_BASE_URL = 'http://localhost:8891/composite';
 
 const AdminPage = () => {
-  const [username, setUsername] = useState(''); // Input field for username
-  const [userId, setUserId] = useState(''); // Input field for user ID
-  const [userInfo, setUserInfo] = useState(null); // Store user information
-  const [products, setProducts] = useState([]); // Store products associated with the user
-  const [orders, setOrders] = useState([]); // Store orders associated with the user
-  const [error, setError] = useState(''); // Error handling
+  const [username, setUsername] = useState('');
+  const [userId, setUserId] = useState('');
+  const [userInfo, setUserInfo] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [error, setError] = useState('');
 
-  // Function to handle searching users by username or user ID
+  // Pagination states for products
+  const [productPage, setProductPage] = useState(1);
+  const productsPerPage = 5;
+  const productIndexLast = productPage * productsPerPage;
+  const productIndexFirst = productIndexLast - productsPerPage;
+  const currentProducts = products.slice(productIndexFirst, productIndexLast);
+
+  // Pagination states for orders
+  const [orderPage, setOrderPage] = useState(1);
+  const ordersPerPage = 5;
+  const orderIndexLast = orderPage * ordersPerPage;
+  const orderIndexFirst = orderIndexLast - ordersPerPage;
+  const currentOrders = orders.slice(orderIndexFirst, orderIndexLast);
+
   const handleSearch = () => {
     if (username.trim() === '' && userId.trim() === '') {
       setError('Please enter a username or user ID.');
       return;
     }
 
-    setError(''); // Clear any existing errors
-
-    // Reset previous data
+    setError('');
     setUserInfo(null);
     setProducts([]);
     setOrders([]);
+    setProductPage(1); // Reset pagination
+    setOrderPage(1);
 
-    // Fetch all info (user details, products, orders) in a single call
     axios.get(`${COMPOSITE_API_BASE_URL}/all?user_id=${userId || username}`)
       .then((response) => {
         const data = response.data;
         
         if (data.users && data.users.length > 0) {
-          setUserInfo(data.users[0]); // Set user information
+          setUserInfo(data.users[0]);
         } else {
           setError('No user found with the given information.');
         }
 
-        setProducts(data.products || []); // Set associated products
-        setOrders(data.orders || []);     // Set associated orders
+        setProducts(data.products || []);
+        setOrders(data.orders || []);
       })
       .catch(() => setError('Error fetching information.'));
   };
@@ -103,7 +115,7 @@ const AdminPage = () => {
               </tr>
             </thead>
             <tbody>
-              {products.map(product => (
+              {currentProducts.map(product => (
                 <tr key={product.product_id}>
                   <td>{product.product_id}</td>
                   <td>{product.product_name}</td>
@@ -115,6 +127,13 @@ const AdminPage = () => {
               ))}
             </tbody>
           </table>
+
+          {/* Product Pagination Controls */}
+          <div className="pagination-controls">
+            <button onClick={() => setProductPage(productPage - 1)} disabled={productPage === 1}>Previous</button>
+            <span>Page {productPage} of {Math.ceil(products.length / productsPerPage)}</span>
+            <button onClick={() => setProductPage(productPage + 1)} disabled={productPage === Math.ceil(products.length / productsPerPage)}>Next</button>
+          </div>
         </div>
       )}
 
@@ -137,7 +156,7 @@ const AdminPage = () => {
               </tr>
             </thead>
             <tbody>
-              {orders.map(order => (
+              {currentOrders.map(order => (
                 <tr key={order.order_id}>
                   <td>{order.order_id}</td>
                   <td>{order.quantity}</td>
@@ -152,6 +171,13 @@ const AdminPage = () => {
               ))}
             </tbody>
           </table>
+
+          {/* Order Pagination Controls */}
+          <div className="pagination-controls">
+            <button onClick={() => setOrderPage(orderPage - 1)} disabled={orderPage === 1}>Previous</button>
+            <span>Page {orderPage} of {Math.ceil(orders.length / ordersPerPage)}</span>
+            <button onClick={() => setOrderPage(orderPage + 1)} disabled={orderPage === Math.ceil(orders.length / ordersPerPage)}>Next</button>
+          </div>
         </div>
       )}
 
@@ -161,3 +187,4 @@ const AdminPage = () => {
 };
 
 export default AdminPage;
+

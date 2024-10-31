@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Orders.css';
-import { useNavigate } from 'react-router-dom';
 import BackToHomeButton from './BackToHomeButton';
 
 const COMPOSITE_API_BASE_URL = 'http://localhost:8891/composite';
+const ITEMS_PER_PAGE = 5; // Number of items to display per page
 
 const Orders = () => {
   const [orderId, setOrderId] = useState('');
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1); // Current page for pagination
 
   const handleSearch = () => {
     axios
@@ -32,6 +32,27 @@ const Orders = () => {
       });
   };
 
+  // Pagination handlers
+  const totalPages = Math.ceil(orders.length / ITEMS_PER_PAGE);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  // Calculate orders to display on the current page
+  const currentOrders = orders.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
   return (
     <div className="center-container">
       <h1 className="search-title">Search Orders</h1>
@@ -51,7 +72,7 @@ const Orders = () => {
       {error && <p className="error-message">{error}</p>}
       
       {/* Orders Table */}
-      {orders.length > 0 ? (
+      {currentOrders.length > 0 ? (
         <div className="table-container">
           <table className="order-table">
             <thead>
@@ -68,7 +89,7 @@ const Orders = () => {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order, index) => (
+              {currentOrders.map((order, index) => (
                 <tr key={index}>
                   <td>{order.order_id}</td>
                   <td>{order.quantity}</td>
@@ -83,6 +104,17 @@ const Orders = () => {
               ))}
             </tbody>
           </table>
+          
+          {/* Pagination Controls */}
+          <div className="pagination-controls">
+            <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+              Previous
+            </button>
+            <span>Page {currentPage} of {totalPages}</span>
+            <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+              Next
+            </button>
+          </div>
         </div>
       ) : (
         !error && <p>No orders found</p>

@@ -115,3 +115,31 @@
         max-width: 100%;
     }
 }
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.pagination-controls button {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: none;
+    background-color: #001f3f;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pagination-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination-controls span {
+    font-size: 1rem;
+    color: #333;
+}
