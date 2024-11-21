@@ -25,10 +25,9 @@ const Homepage = () => {
 
       <div className="main-content">
         <Carousel className="carousel-container" showThumbs={false} autoPlay infiniteLoop>
-          {/* Example images */}
-          <div><img src="https://via.placeholder.com/800x400" alt="Item 1" /></div>
-          <div><img src="https://via.placeholder.com/800x400" alt="Item 2" /></div>
-          <div><img src="https://via.placeholder.com/800x400" alt="Item 3" /></div>
+          <div><img src="frontpage.png" alt="Item 1" /></div>
+          <div><img src="frontpage2.png" alt="Item 2" /></div>
+          <div><img src="frontpage3.png" alt="Item 3" /></div>
         </Carousel>
 
         <div className="welcome-message">
