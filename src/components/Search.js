@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Search.css';
 import BackToHomeButton from './BackToHomeButton';
 
-const COMPOSITE_API_BASE_URL = 'http://localhost:8891/composite';
+const COMPOSITE_API_BASE_URL = 'http://localhost:8891/';
 
 const Search = () => {
   const [query, setQuery] = useState('');

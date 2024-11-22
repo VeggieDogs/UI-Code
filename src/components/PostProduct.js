@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './PostProduct.css';
 
-const COMPOSITE_API_BASE_URL = 'http://localhost:8891/composite';
+const COMPOSITE_API_BASE_URL = 'http://localhost:8891/';
 
 const PostProduct = () => {
   const navigate = useNavigate();

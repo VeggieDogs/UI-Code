@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './PostOrder.css';
 
-const COMPOSITE_API_BASE_URL = 'http://localhost:8891/composite';
+const COMPOSITE_API_BASE_URL = 'http://localhost:8891/';
 
 const PostOrder = () => {
   const navigate = useNavigate();

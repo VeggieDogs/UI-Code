@@ -4,7 +4,7 @@ import axios from 'axios';
 import './SellerDashboard.css';
 import BackToHomeButton from './BackToHomeButton';
 
-const COMPOSITE_API_BASE_URL = 'http://localhost:8891/composite';
+const COMPOSITE_API_BASE_URL = 'http://localhost:8891/';
 
 const SellerDashboard = ({ sellerId }) => {
   const [products, setProducts] = useState([]);

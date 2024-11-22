@@ -3,7 +3,7 @@ import axios from 'axios';
 import './AdminPage.css'; // CSS file for styling the Admin page
 import BackToHomeButton from './BackToHomeButton';
 
-const COMPOSITE_API_BASE_URL = 'http://localhost:8891/composite';
+const COMPOSITE_API_BASE_URL = 'http://localhost:8891/';
 
 const AdminPage = () => {
   const [username, setUsername] = useState(''); // Input field for username
