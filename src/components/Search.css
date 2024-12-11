@@ -94,11 +94,7 @@
     color: inherit;
 }
 
-/* Back to Home button */
-.back-home-button {
-    margin-top: 20px;
-}
-
+/* Pagination Controls */
 .pagination-controls {
     display: flex;
     justify-content: center;
@@ -111,10 +107,10 @@
     background-color: #001f3f;
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 8px 12px;
+    font-size: 14px;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 16px;
 }
 
 .pagination-controls button:disabled {
@@ -123,6 +119,5 @@
 }
 
 .pagination-controls span {
-    font-size: 16px;
+    font-size: 14px;
 }
-

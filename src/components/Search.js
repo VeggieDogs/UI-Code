@@ -110,17 +110,15 @@ const Search = () => {
       </div>
 
       {/* Pagination Controls */}
-      {products.length > ITEMS_PER_PAGE && (
-        <div className="pagination-controls">
-          <button onClick={handlePreviousPage} disabled={currentPage === 1}>
-            Previous
-          </button>
-          <span>Page {currentPage} of {totalPages}</span>
-          <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-            Next
-          </button>
-        </div>
-      )}
+      <div className="pagination-controls">
+        <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+          Previous
+        </button>
+        <span>Page {currentPage} of {Math.max(totalPages, 1)}</span>
+        <button onClick={handleNextPage} disabled={currentPage === totalPages || totalPages === 0}>
+          Next
+        </button>
+      </div>
 
       <BackToHomeButton />
     </div>

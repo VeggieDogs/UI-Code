@@ -20,6 +20,7 @@ const Orders = () => {
         if (response.data && response.data.orders) {
           setOrders(response.data.orders);
           setError('');
+          setCurrentPage(1); // Reset to the first page on new search
         } else {
           setError('No orders found');
           setOrders([]);
@@ -104,21 +105,27 @@ const Orders = () => {
               ))}
             </tbody>
           </table>
-          
-          {/* Pagination Controls */}
-          <div className="pagination-controls">
-            <button onClick={handlePreviousPage} disabled={currentPage === 1}>
-              Previous
-            </button>
-            <span>Page {currentPage} of {totalPages}</span>
-            <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-              Next
-            </button>
-          </div>
         </div>
       ) : (
         !error && <p>No orders found</p>
       )}
+
+      {/* Pagination Controls */}
+      <div className="pagination-controls">
+        <button 
+          onClick={handlePreviousPage} 
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span>Page {currentPage} of {Math.max(totalPages, 1)}</span>
+        <button 
+          onClick={handleNextPage} 
+          disabled={currentPage === totalPages || totalPages === 0}
+        >
+          Next
+        </button>
+      </div>
 
       <BackToHomeButton />
     </div>
