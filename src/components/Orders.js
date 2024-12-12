@@ -4,6 +4,7 @@ import './Orders.css';
 import BackToHomeButton from './BackToHomeButton';
 
 const COMPOSITE_API_BASE_URL = 'http://localhost:8891/';
+const ITEMS_PER_PAGE = 5; // Number of users per pagej
 
 const Orders = () => {
   const [orderId, setOrderId] = useState('');

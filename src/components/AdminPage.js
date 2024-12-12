@@ -3,12 +3,8 @@ import axios from 'axios';
 import './AdminPage.css'; // CSS file for styling the Admin page
 import BackToHomeButton from './BackToHomeButton';
 
-<<<<<<< HEAD
 const COMPOSITE_API_BASE_URL = 'http://localhost:8891/';
-=======
-const COMPOSITE_API_BASE_URL = 'http://localhost:8891/composite';
 const ITEMS_PER_PAGE = 5; // Number of users per page
->>>>>>> main
 
 const AdminPage = () => {
   const [username, setUsername] = useState('');
@@ -28,7 +24,7 @@ const AdminPage = () => {
     setCurrentPage(1); // Reset to the first page on a new search
 
     axios
-      .get(`${COMPOSITE_API_BASE_URL}/users?${userId ? `user_id=${userId}` : `username=${username}`}`)
+      .get(`${COMPOSITE_API_BASE_URL}/all?${userId ? `user_id=${userId}` : `username=${username}`}`)
       .then((response) => {
         const data = response.data;
 
