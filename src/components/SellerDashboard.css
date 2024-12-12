@@ -127,5 +127,33 @@
   text-align: center;
 }
 
+/* Pagination controls */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination-controls button {
+  padding: 8px 12px;
+  font-size: 1rem;
+  background-color: #001f3f; /* Dark blue */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination-controls button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-controls span {
+  font-size: 1rem;
+  color: #333;
+}
 
 

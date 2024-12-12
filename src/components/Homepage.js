@@ -1,11 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import { useNavigate } from 'react-router-dom';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import './Homepage.css'; // Custom CSS for styling
+import './Homepage.css';
+
+const COMPOSITE_API_BASE_URL = 'http://localhost:8891/composite';
 
 const Homepage = () => {
   const navigate = useNavigate();
+  const [items, setItems] = useState([]);  // Store items to display in the paginated list
+  const [page, setPage] = useState(1);     // State for current page
+  const [totalPages, setTotalPages] = useState(1); // Total number of pages (assume backend provides this)
+
+  // Fetch paginated items from API when the page changes
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await fetch(`${COMPOSITE_API_BASE_URL}/items?page=${page}`);
+        const data = await response.json();
+        
+        setItems(data.items || []);
+        setTotalPages(data.totalPages || 1); // Assume API provides `totalPages`
+      } catch (error) {
+        console.error("Failed to fetch items:", error);
+      }
+    };
+    
+    fetchItems();
+  }, [page]);
 
   const goToLogin = (action) => {
     navigate(`/login?type=${action}`);
@@ -13,6 +35,18 @@ const Homepage = () => {
 
   const goToAdmin = () => {
     navigate("/admin");
+  };
+
+  const nextPage = () => {
+    if (page < totalPages) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (page > 1) {
+      setPage((prevPage) => prevPage - 1);
+    }
   };
 
   return (
@@ -38,6 +72,27 @@ const Homepage = () => {
             <button onClick={() => goToLogin('sell')} className="sell-button">Sell</button>
           </div>
         </div>
+
+        {/* Paginated Items Section */}
+        <div className="paginated-items">
+          <h3>Explore Our Items</h3>
+          <div className="items-list">
+            {items.map(item => (
+              <div key={item.id} className="item">
+                <img src={item.image_url || "https://via.placeholder.com/150"} alt={item.name} />
+                <h4>{item.name}</h4>
+                <p>{item.description}</p>
+              </div>
+            ))}
+          </div>
+          
+          {/* Pagination Controls */}
+          <div className="pagination-controls">
+            <button onClick={prevPage} disabled={page === 1}>Previous</button>
+            <span>Page {page} of {totalPages}</span>
+            <button onClick={nextPage} disabled={page === totalPages}>Next</button>
+          </div>
+        </div>
       </div>
 
       <footer className="footer">
@@ -48,4 +103,3 @@ const Homepage = () => {
 };
 
 export default Homepage;
-

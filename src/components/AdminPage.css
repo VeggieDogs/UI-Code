@@ -1,4 +1,4 @@
-/* Container for admin page */
+/* General Container for Admin Page */
 .admin-container {
     display: flex;
     flex-direction: column;
@@ -7,111 +7,56 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-}
-
-/* Search bar container */
-.search-bar-container {
+  }
+  
+  /* Search Bar Container */
+  .search-bar-container {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
+    justify-content: center;
     margin-bottom: 20px;
     width: 100%;
-    max-width: 200px;
-}
-
-.search-bar-container label {
-    font-size: 16px;
-    font-weight: bold;
-    margin-right: 5px;
-}
-
-.search-bar-container input {
-    width: 280px;
+    max-width: 600px; /* Limit the width of the search bar area */
+  }
+  
+  /* Input Fields */
+  .search-bar-container input {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-}
-
-.search-bar-container button {
+    flex: 1; /* Ensure the inputs take equal space */
+    min-width: 200px; /* Set a minimum width for inputs */
+    max-width: 300px; /* Restrict the maximum width */
+  }
+  
+  /* Button */
+  .search-bar-container button {
+    padding: 10px 20px;
+    font-size: 16px;
     background-color: #001f3f;
     color: white;
     border: none;
-    padding: 10px 20px;
-    cursor: pointer;
     border-radius: 5px;
-    font-size: 16px;
-}
-
-.search-bar-container button:hover {
+    cursor: pointer;
+  }
+  
+  .search-bar-container button:hover {
     background-color: #0056b3;
-}
-
-/* Error message styling */
-.error-message {
-    color: red;
-    margin-bottom: 20px;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-/* User table */
-.table-container {
-    width: 100%;
-    max-width: 1000px;
-    margin-top: 20px;
-    overflow-x: auto;
-}
-
-.user-table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-}
-
-.user-table th, .user-table td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: center;
-    min-width: 100px; /* Ensure minimum width for each column */
-}
-
-.user-table th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-}
-
-.user-table tr:nth-child(even) {
-    background-color: #fafafa;
-}
-
-.user-table tr:hover {
-    background-color: #f0f8ff;
-}
-
-/* Back to Home button styling */
-.back-home-button {
-    background-color: #ff6b00;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-.back-home-button:hover {
-    background-color: #ff4c00;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .search-bar-container input {
-        width: 100%;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .search-bar-container {
+      flex-direction: column; /* Stack the inputs and button vertically on small screens */
+      align-items: center;
     }
-    .table-container {
-        max-width: 100%;
+  
+    .search-bar-container input,
+    .search-bar-container button {
+      width: 100%; /* Take the full width on smaller screens */
+      max-width: none;
     }
-}
+  }
+  

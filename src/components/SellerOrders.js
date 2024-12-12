@@ -1,25 +1,43 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './SellerOrders.css';
-import { useNavigate } from 'react-router-dom';
 import BackToHomeButton from './BackToHomeButton';
 
 const SellerOrders = () => {
   const [orderId, setOrderId] = useState('');
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const ordersPerPage = 5; // Number of orders to show per page
 
   // Fetch orders from the Flask backend using Order ID
   const handleSearch = () => {
-    axios.get(`/search_order?order_id=${orderId}`) // Searching by order_id now
+    axios.get(`/search_order?order_id=${orderId}`)
       .then(response => {
         setOrders(response.data.orders || []);
         setError('');
+        setCurrentPage(1); // Reset to first page on new search
       })
       .catch(err => {
         setError('No sales orders found');
       });
+  };
+
+  // Pagination controls
+  const totalPages = Math.ceil(orders.length / ordersPerPage);
+
+  const paginateOrders = () => {
+    const startIndex = (currentPage - 1) * ordersPerPage;
+    const endIndex = startIndex + ordersPerPage;
+    return orders.slice(startIndex, endIndex);
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
 
   return (
@@ -54,8 +72,8 @@ const SellerOrders = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.length > 0 ? (
-              orders.map((order, index) => (
+            {paginateOrders().length > 0 ? (
+              paginateOrders().map((order, index) => (
                 <tr key={index}>
                   <td>{order.order_id}</td>
                   <td>{order.buyerName}</td>
@@ -72,6 +90,13 @@ const SellerOrders = () => {
             )}
           </tbody>
         </table>
+      </div>
+
+      {/* Pagination Controls */}
+      <div className="pagination-controls">
+        <button onClick={handlePreviousPage} disabled={currentPage === 1}>Previous</button>
+        <span>Page {currentPage} of {totalPages}</span>
+        <button onClick={handleNextPage} disabled={currentPage === totalPages}>Next</button>
       </div>
 
       <BackToHomeButton />

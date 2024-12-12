@@ -1,5 +1,4 @@
-// src/components/ProductPage.js
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './ProductPage.css';
 import BackToHomeButton from './BackToHomeButton';
@@ -7,7 +6,17 @@ import BackToHomeButton from './BackToHomeButton';
 const ProductPage = ({ products }) => {
   const { productId } = useParams();
   const navigate = useNavigate();
-  
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5; // Customize this to show more or fewer items per page
+
+  // Get the index range for the current page
+  const indexOfLastProduct = currentPage * itemsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  // Find the product based on productId in the URL, if applicable
   const product = products.find((p) => p.id === parseInt(productId));
 
   if (!product) {
@@ -15,7 +24,20 @@ const ProductPage = ({ products }) => {
   }
 
   const goToProductListing = () => {
-    navigate('/seller-dashboard'); // Adjust path for product listing page
+    navigate('/seller-dashboard');
+  };
+
+  // Pagination handlers
+  const nextPage = () => {
+    if (currentPage < Math.ceil(products.length / itemsPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   return (
@@ -43,6 +65,17 @@ const ProductPage = ({ products }) => {
             <p>Delivery: [Placeholder for delivery info]</p>
           </div>
         </div>
+      </div>
+
+      {/* Pagination Controls */}
+      <div className="pagination-controls">
+        <button onClick={prevPage} disabled={currentPage === 1}>
+          Previous
+        </button>
+        <span>Page {currentPage} of {Math.ceil(products.length / itemsPerPage)}</span>
+        <button onClick={nextPage} disabled={currentPage === Math.ceil(products.length / itemsPerPage)}>
+          Next
+        </button>
       </div>
 
       {/* Back to Product Listing and Back to Home Buttons */}
