@@ -1,4 +1,4 @@
-/* Container to center all elements */
+/* General Styling */
 .center-container {
   display: flex;
   flex-direction: column;
@@ -8,13 +8,11 @@
   padding: 20px;
 }
 
-/* Search title alignment */
 .search-title {
   font-size: 1.8rem;
   margin-bottom: 20px;
 }
 
-/* Search bar container */
 .search-bar-container {
   display: flex;
   justify-content: center;
@@ -24,16 +22,16 @@
 }
 
 .search-bar-container input {
-  padding: 8px;
-  font-size: 14px;
+  padding: 6px;
+  font-size: 12px;
+  width: 150px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  width: 250px;
 }
 
 .search-bar-container button {
-  padding: 8px 16px;
-  font-size: 14px;
+  padding: 6px 12px;
+  font-size: 12px;
   background-color: #001f3f;
   color: white;
   border: none;
@@ -45,14 +43,12 @@
   background-color: #0056b3;
 }
 
-/* Error message styling */
 .error-message {
   color: red;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-/* Orders table styling */
 .table-container {
   width: 100%;
   max-width: 900px;
@@ -76,24 +72,22 @@
   font-weight: bold;
 }
 
-/* Pagination Controls */
 .pagination-controls {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  margin-top: 15px;
+  gap: 5px;
+  margin-top: 10px;
 }
 
 .pagination-controls button {
-  padding: 5px 10px;
-  font-size: 12px;
+  padding: 4px 8px;
+  font-size: 10px;
+  border: none;
   background-color: #001f3f;
   color: white;
-  border: none;
   border-radius: 3px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .pagination-controls button:disabled {
@@ -102,11 +96,8 @@
   cursor: not-allowed;
 }
 
-.pagination-controls button:hover:enabled {
-  background-color: #0056b3;
-}
-
 .pagination-controls span {
-  font-size: 12px;
+  font-size: 10px;
   color: #333;
 }
+

@@ -4,7 +4,7 @@ import './Orders.css';
 import BackToHomeButton from './BackToHomeButton';
 
 const COMPOSITE_API_BASE_URL = 'http://localhost:8891/';
-const ITEMS_PER_PAGE = 5; // Number of users per pagej
+const ITEMS_PER_PAGE = 5; // Number of orders per page
 
 const Orders = () => {
   const [orderId, setOrderId] = useState('');
@@ -14,12 +14,11 @@ const Orders = () => {
 
   const handleSearch = () => {
     axios
-      .get(`${COMPOSITE_API_BASE_URL}/orders?order_id=${orderId}`)
+      .get(`${COMPOSITE_API_BASE_URL}/search_order?order_id=${orderId}`)
       .then((response) => {
+        console.log("API Response:", response.data); // Log the response for debugging
         if (response.data && response.data.orders) {
-            //console.log("API Response:", response.data.orders); // Debug: log the entire response
           setOrders(response.data.orders);
-            //console.log("Orders state:", orders, orders.length); // Debug state updates
           setError('');
           setCurrentPage(1); // Reset to the first page on new search
         } else {
@@ -28,14 +27,14 @@ const Orders = () => {
         }
       })
       .catch((err) => {
-        console.error("Error fetching orders:", err); // Debug: log the error
+        console.error('Error fetching orders:', err); // Log the error
         setError('No orders found');
         setOrders([]);
       });
   };
 
-  // Pagination handlers
-  const totalPages = Math.ceil(orders.length / ITEMS_PER_PAGE);
+  // Pagination calculations
+  const totalPages = Math.ceil(Math.max(orders.length, 1) / ITEMS_PER_PAGE);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -58,7 +57,7 @@ const Orders = () => {
   return (
     <div className="center-container">
       <h1 className="search-title">Search Orders</h1>
-      
+
       {/* Search Bar */}
       <div className="search-bar-container">
         <input
@@ -72,59 +71,55 @@ const Orders = () => {
 
       {/* Display Error if any */}
       {error && <p className="error-message">{error}</p>}
-      
-      {/* Orders Table */}
-            {orders.length > 0 ? (
-                <div>
 
-                    <div className="table-container">
-                        <table className="order-table">
-                            <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Quantity</th>
-                                    <th>Total Price</th>
-                                    <th>Purchase Time</th>
-                                    <th>Status</th>
-                                    <th>Seller ID</th>
-                                    <th>Buyer ID</th>
-                                    <th>Product ID</th>
-                                    <th>Created At</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {orders.map((order, index) => (
-                                    <tr key={index}>
-                                        <td>{order.order_id}</td>
-                                        <td>{order.quantity}</td>
-                                        <td>{order.total_price}</td>
-                                        <td>{order.purchase_time}</td>
-                                        <td>{order.status}</td>
-                                        <td>{order.seller_id}</td>
-                                        <td>{order.buyer_id}</td>
-                                        <td>{order.product_id}</td>
-                                        <td>{order.created_at}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+      {/* Orders Table */}
+      {orders.length > 0 ? (
+        <div className="table-container">
+          <table className="order-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Purchase Time</th>
+                <th>Status</th>
+                <th>Seller ID</th>
+                <th>Buyer ID</th>
+                <th>Product ID</th>
+                <th>Created At</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentOrders.map((order, index) => (
+                <tr key={index}>
+                  <td>{order.order_id}</td>
+                  <td>{order.quantity}</td>
+                  <td>{order.total_price}</td>
+                  <td>{order.purchase_time}</td>
+                  <td>{order.status}</td>
+                  <td>{order.seller_id}</td>
+                  <td>{order.buyer_id}</td>
+                  <td>{order.product_id}</td>
+                  <td>{order.created_at}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : (
         !error && <p>No orders found</p>
       )}
 
       {/* Pagination Controls */}
       <div className="pagination-controls">
-        <button 
-          onClick={handlePreviousPage} 
-          disabled={currentPage === 1}
-        >
+        <button onClick={handlePreviousPage} disabled={currentPage === 1}>
           Previous
         </button>
-        <span>Page {currentPage} of {Math.max(totalPages, 1)}</span>
-        <button 
-          onClick={handleNextPage} 
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={handleNextPage}
           disabled={currentPage === totalPages || totalPages === 0}
         >
           Next
@@ -137,3 +132,5 @@ const Orders = () => {
 };
 
 export default Orders;
+
+

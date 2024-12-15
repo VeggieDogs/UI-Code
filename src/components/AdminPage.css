@@ -1,62 +1,152 @@
 /* General Container for Admin Page */
 .admin-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  /* Search Bar Container */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Search Bar Container */
+.search-bar-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 100px; /* Adjusted for better flexibility */
+}
+
+/* Input Fields */
+.search-bar-container input {
+  padding: 8px; /* Adjusted padding */
+  font-size: 14px; /* Adjusted font size */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  flex: 1;
+  min-width: 150px; /* Minimum width */
+  max-width: 200px; /* Adjusted maximum width for better usability */
+}
+
+/* Search Button */
+.search-bar-container button {
+  padding: 6px 12px; /* Reduced padding */
+  font-size: 12px; /* Reduced font size */
+  background-color: #001f3f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-bar-container button:hover {
+  background-color: #0056b3;
+}
+
+/* Error Message Styling */
+.error-message {
+  color: red;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* User Table */
+.table-container {
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 20px;
+  overflow-x: auto; /* Ensure horizontal scrolling for wide tables */
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.user-table th,
+.user-table td {
+  padding: 8px; /* Reduced padding */
+  border: 1px solid #ddd;
+}
+
+.user-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.user-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.user-table tr:hover {
+  background-color: #f0f8ff;
+}
+
+/* Pagination Controls */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 15px;
+}
+
+.pagination-controls button {
+  padding: 4px 8px; /* Smaller button */
+  font-size: 12px; /* Adjusted font size */
+  border: none;
+  background-color: #001f3f;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-controls button:hover:enabled {
+  background-color: #0056b3;
+}
+
+.pagination-controls button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.pagination-controls span {
+  font-size: 6px; /* Adjusted font size */
+  color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .search-bar-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 20px;
-    width: 100%;
-    max-width: 600px; /* Limit the width of the search bar area */
+    flex-direction: column; /* Stack inputs and button vertically */
+    align-items: center;
   }
-  
-  /* Input Fields */
-  .search-bar-container input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    flex: 1; /* Ensure the inputs take equal space */
-    min-width: 200px; /* Set a minimum width for inputs */
-    max-width: 300px; /* Restrict the maximum width */
-  }
-  
-  /* Button */
+
+  .search-bar-container input,
   .search-bar-container button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #001f3f;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    width: 100%; /* Full width for smaller screens */
+    max-width: none;
   }
-  
-  .search-bar-container button:hover {
-    background-color: #0056b3;
+
+  .user-table th,
+  .user-table td {
+    font-size: 12px; /* Smaller text size for better readability */
+    padding: 6px;
   }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .search-bar-container {
-      flex-direction: column; /* Stack the inputs and button vertically on small screens */
-      align-items: center;
-    }
-  
-    .search-bar-container input,
-    .search-bar-container button {
-      width: 100%; /* Take the full width on smaller screens */
-      max-width: none;
-    }
+
+  .pagination-controls span {
+    font-size: 10px;
   }
+}
+
+
   
